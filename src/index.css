@@ -1,0 +1,368 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #eef1f6;
+  --bg-elev: #f7f8fb;
+  --text: #12151c;
+  --muted: #5c6478;
+  --line: rgba(18, 21, 28, 0.12);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #070b16;
+  --bg-elev: #12182a;
+  --text: #f3f5fb;
+  --muted: #a7b0c6;
+  --line: rgba(243, 245, 251, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Outfit, ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(210, 255, 61, 0.35);
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 22s ease-out forwards;
+}
+
+@keyframes hero-copy {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-copy {
+  animation: hero-copy 0.6s ease;
+}
+
+@keyframes menu-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu-pop {
+  animation: menu-pop 0.22s ease;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.45s ease;
+}
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  background: #07080c;
+  clip-path: circle(150% at 50% 46%);
+}
+
+.gate-grain,
+.gate-vignette,
+.gate-beam,
+.gate-rings,
+.gate-sprocket {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gate-grain {
+  opacity: 0.18;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+  animation: gate-grain 0.45s steps(2) infinite;
+}
+
+.gate-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.25) 48%, rgba(0, 0, 0, 0.82) 100%);
+}
+
+.gate-beam {
+  background: linear-gradient(115deg, transparent 35%, rgba(210, 255, 61, 0.2) 48%, transparent 62%);
+  transform: translateX(-70%);
+  animation: gate-beam 2.8s ease-out 0.2s forwards;
+}
+
+.gate-rings span {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  border: 1px solid rgba(210, 255, 61, 0.4);
+  border-radius: 999px;
+  transform: translate(-50%, -50%) scale(0.4);
+  opacity: 0;
+  animation: gate-ring 2.4s ease-out forwards;
+}
+
+.gate-rings span:nth-child(1) {
+  width: 220px;
+  height: 220px;
+}
+
+.gate-rings span:nth-child(2) {
+  width: 380px;
+  height: 380px;
+  border-color: rgba(139, 108, 255, 0.4);
+  animation-delay: 0.18s;
+}
+
+.gate-rings span:nth-child(3) {
+  width: 560px;
+  height: 560px;
+  animation-delay: 0.36s;
+}
+
+.gate-sprocket {
+  width: 28px;
+  inset: 0 auto 0 0;
+  background:
+    radial-gradient(circle at 50% 18px, #07080c 6px, transparent 7px) 0 0 / 28px 36px,
+    linear-gradient(#8b6cff, #8b6cff);
+  opacity: 0.55;
+  animation: gate-sprocket 8s linear infinite;
+}
+
+.gate-sprocket-right {
+  left: auto;
+  right: 0;
+  animation-direction: reverse;
+}
+
+.gate-mark {
+  animation: gate-mark 0.8s ease 0.7s both;
+}
+
+.gate-stroke {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: gate-draw 1.05s ease 0.85s forwards;
+}
+
+.gate-stroke-late {
+  animation-delay: 1.15s;
+}
+
+.gate-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(8px);
+  animation: gate-letter 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.gate-line {
+  opacity: 0;
+  animation: gate-letter 0.8s ease 2.15s forwards;
+}
+
+.gate-line-late {
+  animation-delay: 2.45s;
+}
+
+.gate-card {
+  opacity: 0;
+  transform: translateY(24px) rotate(var(--tilt));
+  animation:
+    gate-card-in 0.8s ease forwards,
+    gate-drift 5.5s ease-in-out 3.2s infinite;
+}
+
+.gate-enter {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.gate-enter-on {
+  pointer-events: auto;
+  animation: gate-letter 0.55s ease forwards;
+}
+
+.gate-out {
+  animation: gate-iris 0.85s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes gate-grain {
+  to {
+    background-position: 3px 2px;
+  }
+}
+
+@keyframes gate-beam {
+  to {
+    transform: translateX(70%);
+  }
+}
+
+@keyframes gate-ring {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.35) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1) rotate(18deg);
+  }
+}
+
+@keyframes gate-sprocket {
+  to {
+    background-position: 0 36px, 0 0;
+  }
+}
+
+@keyframes gate-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes gate-mark {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes gate-letter {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes gate-card-in {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--tilt));
+  }
+}
+
+@keyframes gate-drift {
+  50% {
+    transform: translateY(-12px) rotate(var(--tilt));
+  }
+}
+
+@keyframes gate-iris {
+  to {
+    clip-path: circle(0% at 50% 46%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-kenburns,
+  .hero-copy,
+  .menu-pop,
+  .page-enter,
+  .gate-grain,
+  .gate-beam,
+  .gate-rings span,
+  .gate-sprocket,
+  .gate-mark,
+  .gate-stroke,
+  .gate-letter,
+  .gate-line,
+  .gate-card {
+    animation: none !important;
+  }
+
+  .gate-letter,
+  .gate-line,
+  .gate-card,
+  .gate-mark,
+  .gate-enter {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    pointer-events: auto;
+  }
+
+  .gate-stroke {
+    stroke-dashoffset: 0;
+  }
+}
